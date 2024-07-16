@@ -29,7 +29,7 @@ export default {
           const className = `header-icon-${dasherize(fragments[0])}`;
           const viewClass = fragments[3].toLowerCase();
           const target = fragments[4].toLowerCase() === "blank" ? "_blank" : "";
-          const rel = target ? "noopener" : "";
+          const rel = target ? "nofollow noopener noreferrer" : "";
           const isLastLink =
             link === links[links.length - 1] ? "last-custom-icon" : "";
 
