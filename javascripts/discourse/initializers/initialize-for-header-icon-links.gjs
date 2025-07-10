@@ -37,7 +37,7 @@ export default {
           const iconTemplate = buildIcon(link.icon, link.title);
           const className = `header-icon-${dasherize(link.title)}`;
           const target = link.target === "blank" ? "_blank" : "";
-          const rel = link.target ? "noopener" : "";
+          const rel = link.target ? "nofollow noopener noreferrer" : "";
           const isLastLink =
             index === links.length - 1 ? "last-custom-icon" : "";
 
