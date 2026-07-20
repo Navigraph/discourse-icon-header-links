@@ -21,7 +21,17 @@ export default {
   initialize() {
     withPluginApi("0.8.41", (api) => {
       try {
-        const links = settings.header_links || [];
+        const site = api.container.lookup("service:site");
+        let links = settings.header_links;
+        if (site.mobileView) {
+          links = links.filter(
+            (link) => link.view === "vmo" || link.view === "vdm"
+          );
+        } else {
+          links = links.filter(
+            (link) => link.view === "vdo" || link.view === "vdm"
+          );
+        }
 
         links.forEach((link, index) => {
           const iconTemplate = buildIcon(link.icon, link.title);
@@ -30,9 +40,6 @@ export default {
           const rel = link.target ? "nofollow noopener noreferrer" : "";
           const isLastLink =
             index === links.length - 1 ? "last-custom-icon" : "";
-
-          // Create a dynamic CSS class based on the link's view setting
-          const viewClass = `view-${link.view}`;
 
           let style = "";
           if (link.width) {
@@ -44,7 +51,7 @@ export default {
               class={{concatClass
                 "custom-header-icon-link"
                 className
-                viewClass
+                link.view
                 isLastLink
               }}
             >
